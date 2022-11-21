@@ -6,14 +6,16 @@ type Props = {
   year: number;
 };
 
-function getDaysInMonth(year: number, month: number) {
+function getDaysInMonth(year: number, month: number): number {
   return new Date(year, month, 0).getDate();
 }
 
 let drawCalendar = (month: number, year: number) => {
+  // will update later
   let arr: any[] = [];
-  let counter = 1;
-  let curMaxDays = getDaysInMonth(year, month);
+
+  let counter: number = 1;
+  let curMaxDays: number = getDaysInMonth(year, month);
   let prevMonth: number = month - 1 < 0 ? 11 : month - 1;
   let prevYear: number = month === 11 ? year - 1 : year;
   let prevMaxDays = getDaysInMonth(prevYear, prevMonth);
@@ -44,7 +46,6 @@ let drawCalendar = (month: number, year: number) => {
     }
     arr.push(week);
   }
-  console.log(arr);
   return arr;
 };
 
