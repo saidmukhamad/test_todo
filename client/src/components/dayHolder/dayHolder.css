@@ -1,0 +1,18 @@
+.weekdays {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 500px;
+  height: 40px;
+
+  background-color: aquamarine;
+}
+
+.weekdays > p {
+  width: 100%;
+  text-align: center;
+}
+
+.weekdays > p:nth-child(even) {
+  background-color: bisque;
+}
