@@ -16,3 +16,9 @@
 .weekdays > p:nth-child(even) {
   background-color: bisque;
 }
+
+@media (max-width: 888px) {
+  .weekdays {
+    width: 100%;
+  }
+}

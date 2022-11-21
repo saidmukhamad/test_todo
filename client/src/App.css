@@ -9,12 +9,39 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: antiquewhite;
+  background-image: linear-gradient(
+    to right top,
+    #e1a0c5,
+    #d7a0ce,
+    #c9a1d7,
+    #b8a3df,
+    #a5a5e4,
+    #93abe9,
+    #7fb2eb,
+    #6db7ea,
+    #62c0e7,
+    #61c9e1,
+    #6bd0d9,
+    #7bd6d0
+  );
 }
 
 .calendar {
+  box-sizing: content-box;
   width: 500px;
   height: 500px;
+  border-radius: 5px;
+  margin: 12px;
 
   background-color: rgb(132, 148, 219);
+}
+
+@media (max-width: 500px) {
+  .App {
+    flex-direction: column;
+  }
+
+  .calendar {
+    width: 100%;
+  }
 }
