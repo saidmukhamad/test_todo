@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500&display=swap");
 * {
   margin: 0;
   padding: 0;
+  font-family: "Raleway";
 }
 
 .App {
@@ -33,7 +36,8 @@
   border-radius: 5px;
   margin: 12px;
 
-  background-color: rgb(132, 148, 219);
+  background-color: #59c1bd;
+  box-shadow: 2px 2px 2px rgba(114, 111, 111, 0.185);
 }
 
 @media (max-width: 500px) {

@@ -1,6 +1,6 @@
 import React from "react";
 import UserContext, { IUser } from "../../context/userContext";
-
+import Notions from "../notions/Notions";
 import "./user.css";
 type Props = {};
 
@@ -31,9 +31,9 @@ const User = (props: Props) => {
   return (
     <div className="user">
       {user.logged ? (
-        user.name
+        <Notions />
       ) : (
-        <div>
+        <div className="user-container">
           <form>
             <h1>Войти</h1>
             <input

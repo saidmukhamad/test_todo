@@ -29,7 +29,6 @@ const Calendar = (props: Props) => {
         year={ref.curYear}
       />
       <DayHolder month={ref.curMonth} year={ref.curYear} />
-      <button> {test ? "true" : "false"}</button>
     </div>
   );
 };

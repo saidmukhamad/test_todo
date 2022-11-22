@@ -15,13 +15,16 @@ let drawCalendar = (month: number, year: number) => {
   let arr: any[] = [];
 
   let counter: number = 1;
-  let curMaxDays: number = getDaysInMonth(year, month);
-  let prevMonth: number = month - 1 < 0 ? 11 : month - 1;
+  let curMaxDays: number = getDaysInMonth(year, month + 1);
+  let prevMonth: number = month - 1 < 0 ? 11 : month;
+  let curMonth: number = month + 1;
   let prevYear: number = month === 11 ? year - 1 : year;
   let prevMaxDays = getDaysInMonth(prevYear, prevMonth);
+  let prevCounter = prevMaxDays;
+  let state: "prev" | "cur" | "next" = "prev";
 
   for (let i = 0; i < 5; i++) {
-    let week = [0, 0, 0, 0, 0, 0, 0];
+    let week = [{}, {}, {}, {}, {}, {}, {}];
     let weekCounter = 0;
     let test = new Date();
     test.setMonth(month);
@@ -30,17 +33,19 @@ let drawCalendar = (month: number, year: number) => {
     if (arr.length === 0) {
       test.setDate(0);
       for (let j = test.getDay(); j != 0; j--) {
-        week[j - 1] = prevMaxDays;
-        prevMaxDays--;
+        week[j - 1] = { day: prevCounter, month: prevMonth, class: state };
+        prevCounter--;
         weekCounter++;
       }
     }
+    state = "cur";
 
     while (weekCounter != 7) {
       if (counter === curMaxDays + 1) {
         counter = 1;
+        state = "next";
       }
-      week[weekCounter] = counter;
+      week[weekCounter] = { day: counter, month: curMonth, class: state };
       counter++;
       weekCounter++;
     }
@@ -51,7 +56,7 @@ let drawCalendar = (month: number, year: number) => {
 
 const DayHolder = ({ month, year }: Props) => {
   let [test, setTest] = React.useState<any[]>();
-
+  console.log(test);
   React.useEffect(() => {
     setTest(drawCalendar(month, year));
   }, [month, year]);
@@ -68,19 +73,26 @@ const DayHolder = ({ month, year }: Props) => {
         <p>Sun</p>
       </div>
 
-      {test
-        ? test.map((week, index) => (
-            <div key={index} className="weekdays">
-              <p key={week[0]}>{week[0]}</p>
-              <p key={week[1]}>{week[1]}</p>
-              <p key={week[2]}>{week[2]}</p>
-              <p key={week[3]}>{week[3]}</p>
-              <p key={week[4]}>{week[4]}</p>
-              <p key={week[5]}> {week[5]}</p>
-              <p key={week[6]}>{week[6]}</p>
+      {test ? (
+        <div className="week-container">
+          {test.map((week, index) => (
+            <div key={index} className="weekdates">
+              {week.map((data: any, index: number) =>
+                index < 5 ? (
+                  <p className={data.class} key={data.month + data.day}>
+                    {" "}
+                    {data.day}
+                  </p>
+                ) : (
+                  <p className={data.class} id="weekends" key={data.day + data.month}>
+                    {data.day}
+                  </p>
+                )
+              )}
             </div>
-          ))
-        : null}
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -4,14 +4,14 @@ import User from "./components/user/User";
 
 import UserContext, { IUser } from "./context/userContext";
 import "./App.css";
-console.log(process.env.REACT_APP_SERVER);
-console.log(process.env.REACT_APP_SECRET_NAME);
+
 function App() {
   let [user, setUser] = React.useState<IUser>({
     name: "",
-    logged: false,
+    logged: true,
     data: [],
   });
+
   return (
     <div className="App">
       <UserContext.Provider value={user}>
