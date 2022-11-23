@@ -1,5 +1,7 @@
 .user {
   display: flex;
+  /* overflow: scroll; */
+
   justify-content: space-between;
   flex-direction: column;
   width: 300px;
@@ -47,9 +49,10 @@
   background-color: #cff5e7;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 800px) {
   .user {
     width: 100%;
+    max-width: 500px;
     margin-left: 0px;
     margin-top: 22px;
   }

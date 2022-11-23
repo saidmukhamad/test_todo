@@ -1,35 +1,25 @@
 import React from "react";
+import Note from "./note/Note";
+import AddNote from "./addNote/AddNote";
+import dataContext from "../../context/dataContext";
 import "./notions.css";
 
 type Props = {};
 
 function Notions({}: Props) {
-  const [profile, setProfile] = React.useState<any>({
-    list: [
-      { notion: "task1", date: "2022-10-10", profile: 1 },
-      { notion: "task2", date: "2022-10-10", profile: 2 },
-      { notion: "task3", date: "2022-10-10", profile: 3 },
-      { notion: "task3", date: "2022-02-11", profile: 3 },
-      { notion: "task34", date: "2022-04-10", profile: 3 },
-      { notion: "task352", date: "2023-09-10", profile: 3 },
-      { notion: "ta1k3", date: "2022-10-10", profile: 3 },
-    ],
-    profiles: [
-      { id: 1, name: "test" },
-      { id: 2, name: "test2" },
-      { id: 3, name: "check" },
-    ],
-  });
+  const [add, setAdd] = React.useState<boolean>(false);
+  const data = React.useContext<any>(dataContext);
 
-  // let test: Date = new Date(profile.list[0].date);
+  const profiles = data.profile;
+  const list = data.list;
 
-  const [active, setActive] = React.useState<any>(1);
-  const [list, setList] = React.useState<any>(profile.list);
+  const [show, setShow] = React.useState<any[]>([]);
+  const [active, setActive] = React.useState<number>(profiles[0].id);
 
   React.useEffect(() => {
-    let arr = profile.list.filter((obj: any) => obj.profile === active);
-    setList(arr);
-  }, [active]);
+    let arr = list.filter((obj: any) => obj.profile === active);
+    setShow(arr);
+  }, [active, list, profiles]);
 
   return (
     <div className="notions-container">
@@ -37,7 +27,7 @@ function Notions({}: Props) {
         <h1>Notions</h1>{" "}
         <div>
           <select value={active} onChange={(e) => setActive(parseInt(e.target.value))}>
-            {profile.profiles.map((p: any) => (
+            {profiles.map((p: any) => (
               <option key={p.id} value={p.id}>
                 {p.name}
               </option>
@@ -46,16 +36,45 @@ function Notions({}: Props) {
         </div>
       </div>
 
-      <div>
-        {list.map((note: any) => (
-          <div>
-            <p>{note.notion}</p>
-            <>{console.log(note)}</>
-            <>{note.date.replaceAll("-", " ")}</>
-            <button>delete</button>
-            <button>edit</button>
-          </div>
-        ))}
+      <div className="notion-item-2">
+        {!add ? (
+          <>
+            <div className="notion-add">
+              <button
+                onClick={() => {
+                  setAdd(!add);
+                }}
+              >
+                Добавить событие
+              </button>
+              <button
+                onClick={() => {
+                  setAdd(!add);
+                }}
+              >
+                Добавить профиль
+              </button>
+            </div>
+            {show.map((note: any) => (
+              <Note key={note.id} id={note.id} note={note} deleteNote={data.deleteNote} />
+            ))}
+            <div className="notion-add">
+              {profiles.length !== 1 && (
+                <button
+                  onClick={() => {
+                    data.deleteProfile(active);
+                    let test = profiles.filter((p: any) => p.id !== active);
+                    setActive(test[0].id);
+                  }}
+                >
+                  Удалить профиль
+                </button>
+              )}
+            </div>
+          </>
+        ) : (
+          <AddNote profileNumber={active} setAdd={setAdd} />
+        )}
       </div>
     </div>
   );

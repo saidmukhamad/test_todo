@@ -1,10 +1,21 @@
 import React from "react";
 import "./dayHolder.css";
+import { Create } from "../../context/createContext";
 import { dates } from "../../model/month";
+
 type Props = {
   month: number;
   year: number;
 };
+
+function newNote(data: any, trigger: any, year: number) {
+  let month = data.month.length === 1 ? `0${data.month}` : data.month;
+  let day = data.day.length === 1 ? `0${data.day}` : data.day;
+  trigger.setCreate({
+    trigger: true,
+    date: `${year}-${month}-${day}`,
+  });
+}
 
 function getDaysInMonth(year: number, month: number): number {
   return new Date(year, month, 0).getDate();
@@ -55,6 +66,8 @@ let drawCalendar = (month: number, year: number) => {
 };
 
 const DayHolder = ({ month, year }: Props) => {
+  let trigger = React.useContext(Create);
+  console.log(trigger);
   let [test, setTest] = React.useState<any[]>();
   console.log(test);
   React.useEffect(() => {
@@ -79,12 +92,25 @@ const DayHolder = ({ month, year }: Props) => {
             <div key={index} className="weekdates">
               {week.map((data: any, index: number) =>
                 index < 5 ? (
-                  <p className={data.class} key={data.month + data.day}>
+                  <p
+                    onClick={() => {
+                      newNote(data, trigger, year);
+                    }}
+                    className={data.class}
+                    key={data.month + data.day}
+                  >
                     {" "}
                     {data.day}
                   </p>
                 ) : (
-                  <p className={data.class} id="weekends" key={data.day + data.month}>
+                  <p
+                    onClick={() => {
+                      newNote(data, trigger, year);
+                    }}
+                    className={data.class}
+                    id="weekends"
+                    key={data.day + data.month}
+                  >
                     {data.day}
                   </p>
                 )

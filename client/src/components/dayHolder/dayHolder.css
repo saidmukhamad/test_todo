@@ -89,8 +89,12 @@
   background-color: #8ec7d2;
 }
 
-@media (max-width: 888px) {
+@media (max-width: 600px) {
   .weekdays {
+    width: 100%;
+  }
+
+  .weekdates {
     width: 100%;
   }
 }

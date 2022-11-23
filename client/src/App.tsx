@@ -1,23 +1,27 @@
 import React from "react";
 import Calendar from "./components/calendar/Calendar";
 import User from "./components/user/User";
-
-import UserContext, { IUser } from "./context/userContext";
+import { UserProvider } from "./context/userContext";
+import { DataProvider } from "./context/dataContext";
+import { Create } from "./context/createContext";
 import "./App.css";
 
 function App() {
-  let [user, setUser] = React.useState<IUser>({
-    name: "",
-    logged: true,
-    data: [],
+  let [create, setCreate] = React.useState({
+    state: false,
+    date: "",
   });
 
   return (
     <div className="App">
-      <UserContext.Provider value={user}>
-        <Calendar />
-        <User />
-      </UserContext.Provider>
+      <UserProvider>
+        <DataProvider>
+          <Create.Provider value={{ create, setCreate }}>
+            <Calendar />
+            <User />
+          </Create.Provider>
+        </DataProvider>
+      </UserProvider>
     </div>
   );
 }

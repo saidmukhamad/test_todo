@@ -10,7 +10,9 @@ type Login = {
 };
 
 const User = (props: Props) => {
-  let user = React.useContext<IUser>(UserContext);
+  let userContext = React.useContext<any>(UserContext);
+  let user = userContext.user;
+
   let [attempt, setAttempt] = React.useState<boolean>(false);
   let [login, setLogin] = React.useState<Login>({
     login: "",
