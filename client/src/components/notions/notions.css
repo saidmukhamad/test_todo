@@ -25,6 +25,7 @@
   font-size: 18px;
   height: 100%;
   width: 100%;
+  cursor: pointer;
 }
 
 .notions-item-1 > div {
@@ -91,8 +92,41 @@
   width: 55px;
 }
 
+.add-note-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-note-container > div {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 25px;
+}
+.add-note-container > div > button {
+  box-sizing: border-box;
+  width: 80px;
+  background-color: #b0d8e0;
+  border: 1px solid #e8f4f6;
+}
+.add-note-container > div > button:hover {
+  background-color: #90adb3ee;
+  border: 1px solid #e8f4f6;
+}
+
+#add-note-item-1 {
+  flex-direction: row;
+}
+#add-note-item-1 button {
+  margin-right: 22px;
+}
+
+#textarea-disable {
+  resize: none;
+}
+
 @media (max-width: 850px) {
   .notion-add > button {
-    margin-right: 10%;
+    font-size: 12px;
   }
 }

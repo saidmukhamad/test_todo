@@ -1,5 +1,4 @@
 import React from "react";
-import { createTracing } from "trace_events";
 export const Create = React.createContext<any>(null);
 
 type Props = {
@@ -12,11 +11,21 @@ const CreateProvider = ({ children }: Props) => {
     date: "",
   });
 
-  React.useEffect(() => {
-    console.log(create, "cccccccccccccccc");
-  }, [create]);
+  const [watch, setWatch] = React.useState<any>({
+    trigger: true,
+    note: {},
+    index: 0,
+  });
 
-  return <Create.Provider value={{ create, setCreate }}>{children}</Create.Provider>;
+  // React.useEffect(() => {
+
+  // }, [create]);
+
+  return (
+    <Create.Provider value={{ create, watch, setCreate, setWatch }}>
+      {children}
+    </Create.Provider>
+  );
 };
 
 export default CreateProvider;

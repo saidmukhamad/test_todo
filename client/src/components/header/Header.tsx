@@ -12,7 +12,6 @@ type Props = {
 };
 
 const Header = function ({ day, month, year, updateMonth, prevMonth }: Props) {
-  console.log(month, "месяц");
   return (
     <div className="header">
       <div onClick={() => prevMonth()}> {"<"} </div>

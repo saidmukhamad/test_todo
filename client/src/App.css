@@ -8,7 +8,7 @@
 
 .App {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,6 +42,7 @@
 
 @media (max-width: 850px) {
   .App {
+    justify-content: start;
     flex-direction: column;
   }
 

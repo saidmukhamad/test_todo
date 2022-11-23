@@ -9,10 +9,15 @@ type Props = {
 };
 
 function newNote(data: any, trigger: any, year: number) {
-  let month = data.month.length === 1 ? `0${data.month}` : data.month;
-  let day = data.day.length === 1 ? `0${data.day}` : data.day;
+  let month = data.month.toString().length === 1 ? `0${data.month}` : data.month;
+  let day = data.day.toString().length === 1 ? `0${data.day}` : data.day;
+
+  trigger.setWatch({
+    trigger: false,
+    note: {},
+  });
   trigger.setCreate({
-    trigger: true,
+    state: true,
     date: `${year}-${month}-${day}`,
   });
 }
@@ -67,9 +72,8 @@ let drawCalendar = (month: number, year: number) => {
 
 const DayHolder = ({ month, year }: Props) => {
   let trigger = React.useContext(Create);
-  console.log(trigger);
+
   let [test, setTest] = React.useState<any[]>();
-  console.log(test);
   React.useEffect(() => {
     setTest(drawCalendar(month, year));
   }, [month, year]);

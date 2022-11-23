@@ -55,6 +55,7 @@
 
 .weekdates > p:hover {
   background-color: #8ec7d2;
+  cursor: pointer;
 }
 
 .weekdays > p {

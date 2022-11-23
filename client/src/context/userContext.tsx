@@ -19,7 +19,6 @@ export const UserProvider = ({ children }: Props) => {
     name: "test",
   });
 
-  console.log(user);
   return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>;
 };
 
