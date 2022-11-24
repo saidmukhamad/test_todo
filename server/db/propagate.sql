@@ -1,25 +1,33 @@
-PRAGMA foreign_keys = ON;
+-- DROP TABLE NOTION;
+
+-- DROP TABLE Profile;
+-- Drop TAble ProfileNotionRelation;
+-- DROP TABLE UserProfileRelation
 
 
-CREATE TABLE USER (
-  id integer PRIMARY KEY AUTOINCREMENT,
-  password TEXT,
-  name TEXT,
-  birthdate TEXT,
-  email TEXT
-);
+-- CREATE TABLE User (
+--   id integer PRIMARY KEY AUTOINCREMENT,
+--   password TEXT,
+--   login TEXT UNIQUE,
+--   name TEXT
+-- );
 
 
-CREATE TABLE NOTION (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  date TEXT NOT NULL,
-  reason TEXT
-);
+-- CREATE TABLE Notion (
+--   id INTEGER PRIMARY KEY AUTOINCREMENT,
+--   date TEXT NOT NULL,
+--   notion TEXT,
+--   profileId INTEGER,
+--   userId INTEGER,
+--   FOREIGN KEY (profileId) REFERENCES Profile (id)
+--   FOREIGN KEY (userId) REFERENCES User (id)
+-- );
 
 
-CREATE TABLE UserNotionRelation (
-  userId INTEGER,
-  notionId INTEGER,
-  FOREIGN KEY (userId) REFERENCES USER (id),
-  FOREIGN KEY (notionId) REFERENCES NOTION (id)
-);
+-- CREATE TABLE Profile (
+--   id INTEGER PRIMARY KEY AUTOINCREMENT,
+--   userId INTEGER,
+--   name TEXT,
+--   FOREIGN KEY (userId) REFERENCES User (id)
+-- );
+
