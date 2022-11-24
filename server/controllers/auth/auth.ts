@@ -3,20 +3,7 @@ import { connect } from "../../db/db";
 import { getBody } from "../../utils/getBody";
 import { dbQuery } from "../../utils/promiseDb";
 
-interface Message {
-  msg: string;
-  success: boolean;
-  data: any[];
-}
-
-interface Login {
-  login: string;
-  password: string;
-}
-
-interface User extends Login {
-  name: string;
-}
+import { Login, User, Message } from "../../utils/types/types";
 
 export const auth = async (req: http.IncomingMessage, res: http.ServerResponse) => {
   try {
@@ -112,11 +99,26 @@ export const register = async (req: http.IncomingMessage, res: http.ServerRespon
   }
 };
 
+export const isLogged = async (login: string, password: string) => {
+  let db: any = await connect();
+  let sql = `SELECT * FROM User WHERE login = '${login}' and password = 'password';`;
+
+  try {
+    let data = await dbQuery(sql, db);
+    if (data.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    return false;
+  }
+};
+
 export const example = async (req: http.IncomingMessage, res: http.ServerResponse) => {
   let db: any = await connect();
 
-  let body: JSON = await getBody(req);
-  console.log(body);
+  let body: any = await getBody(req);
   let sql = ``;
 
   try {
