@@ -55,14 +55,18 @@ const User = (props: Props) => {
 
             <button
               onClick={() => {
-                const requestOptions = {
-                  method: "POST",
-                  // when i'm using application\json, node.js handling not a POST, but an OPTION method
-                  headers: { "Content-Type": "text/plain" },
-                  body: JSON.stringify(login),
-                };
+                userContext.setUser((prev: any) => ({
+                  ...prev,
+                  logged: true,
+                }));
+                // const requestOptions = {
+                //   method: "POST",
+                //   // when i'm using application\json, node.js handling not a POST, but an OPTION method
+                //   headers: { "Content-Type": "text/plain" },
+                //   body: JSON.stringify(login),
+                // };
 
-                fetch("http://localhost:3001/auth", requestOptions);
+                // fetch("http://localhost:3001/auth", requestOptions);
               }}
               type="button"
             >

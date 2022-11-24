@@ -14,12 +14,14 @@ type Props = {
 
 export const UserProvider = ({ children }: Props) => {
   let [user, setUser] = React.useState<IUser>({
-    logged: true,
+    logged: false,
     data: [],
     name: "test",
   });
 
-  return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>
+  );
 };
 
 export default UserContext;
