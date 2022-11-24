@@ -1,5 +1,5 @@
 import sqlite3 from "sqlite3";
-// import util from "node:util";
+import child_process from "child_process";
 
 const sqlite: any = sqlite3.verbose();
 
@@ -8,6 +8,8 @@ export const connect = async () => {
     try {
       resolve(new sqlite.Database("./db/database.db", sqlite.OPEN_READWRITE));
     } catch (error) {
+      child_process.execSync(`./db/sqlite3.exe database.db `);
+      child_process.execSync(`./db/sqlite3.exe database.db < propagate.sql `);
       reject(error);
     }
   });
