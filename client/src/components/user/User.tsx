@@ -59,6 +59,7 @@ const User = (props: Props) => {
                   ...prev,
                   logged: true,
                 }));
+                setAttempt(true);
                 // const requestOptions = {
                 //   method: "POST",
                 //   // when i'm using application\json, node.js handling not a POST, but an OPTION method

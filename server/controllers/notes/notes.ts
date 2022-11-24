@@ -23,7 +23,6 @@ export const newNote = async (req: http.IncomingMessage, res: http.ServerRespons
       let sql = `INSERT INTO Notion(date, notion, profileId, userId) VALUES ('${body.date}', '${body.notion}', ${body.profileId}, ${body.id});`;
 
       let data = await dbQuery(sql, db);
-
       sql = `SELECT * FROM Notion WHERE userId = ${body.id}`;
       data = await dbQuery(sql, db);
 

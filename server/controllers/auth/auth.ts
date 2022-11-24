@@ -101,7 +101,7 @@ export const register = async (req: http.IncomingMessage, res: http.ServerRespon
 
 export const isLogged = async (login: string, password: string) => {
   let db: any = await connect();
-  let sql = `SELECT * FROM User WHERE login = '${login}' and password = 'password';`;
+  let sql = `SELECT * FROM User WHERE login = '${login}' and password = '${password}';`;
 
   try {
     let data = await dbQuery(sql, db);
@@ -120,7 +120,7 @@ export const example = async (req: http.IncomingMessage, res: http.ServerRespons
 
   let body: any = await getBody(req);
   let sql = ``;
-
+  console.log(body);
   try {
     let data = await dbQuery(sql, db);
 
